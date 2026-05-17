@@ -82,14 +82,14 @@ const AllRooms = () => {
 
     //sort rooms
     const sortRooms = (a,b) =>{
-        if(selectedSort = 'Price Low to High')
+        if(selectedSort === 'Price Low to High')
         {
             return a.pricePerNight - b.pricePerNight;
         }
-        if(selectedSort = 'Price High to Low'){
+        if(selectedSort === 'Price High to Low'){
             return b.pricePerNight - a.pricePerNight;
         }
-        if(selectedSort = 'Newest First'){
+        if(selectedSort === 'Newest First'){
             return new Date(b.createdAt) - new Date(a.createdAt)
         }
         return 0;
