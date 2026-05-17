@@ -10,7 +10,8 @@ import connectCloudinary from './configs/cloudinary.js'
 import roomRouter from './routes/roomRoutes.js'
 import bookingRouter from './routes/bookingRoutes.js'
 
-connectDB()
+
+connectDB();
 connectCloudinary();
 
 const app = express()
@@ -31,5 +32,6 @@ app.use('/api/rooms', roomRouter)
 app.use('/api/bookings', bookingRouter)
 
 const PORT = process.env.PORT || 3000
+
 
 app.listen (PORT, ()=> console.log(`Server is running on port ${PORT}`))
