@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { assets, facilityIcons, roomsDummyData } from '../assets/assets'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import StarRating from '../components/StarRating'
 import { useAppContext } from '../context/AppContext'
 
@@ -22,7 +22,7 @@ const RadioButton =({label, selected=false, onChange = ()=>{}})=>{
 }
 
 const AllRooms = () => {
-    const [searchParams, setSearchParams] = useState()
+    const [searchParams, setSearchParams] = useSearchParams()
     const {rooms, navigate, currency} = useAppContext()
     
     const [openFilters, setOpenFilters] = useState(false)
@@ -46,7 +46,7 @@ const AllRooms = () => {
     ]
     const sortOptions = [
         "Price Low to High",
-        "Price Hight to Low",
+        "Price High to Low",
         "Newest First"
     ]
 
@@ -108,7 +108,7 @@ const AllRooms = () => {
     },[rooms, selectedFilters, selectedSort, searchParams]);
 
     const clearFilters = ()=>{
-        setSelectedSort({
+        setSelectedFilters({
             roomType: [],
             priceRange: [],
 
@@ -165,20 +165,20 @@ const AllRooms = () => {
             <p className='text-base font-medium text-gray-800'>FILTERS</p>
             <div className='tex-xs cursor-pointer'>
                 <span onClick={()=>setOpenFilters(!openFilters)} className='lg:hidden'>{openFilters ? 'HIDE' : 'SHOW'}</span>
-                <span className='hidden lg:block'>CLEAR</span>
+                <span onClick={clearFilters} className='hidden lg:block cursor-pointer'>CLEAR</span>
             </div>
         </div>
         <div className={`${openFilters ? 'h-auto' : "h-0 lg:h-auto"} overflow-hidden transition-all duration-700`}>
             <div className='px-5 pt-5'>
                 <p className='font-medium text-gray-800 pb-2'>Popular filters</p>
                 {roomTypes.map((room, index)=>(
-                    <CheckBox key={index} label={room} selected={selectedFilters.roomType.includes(room)} onChange={(checked)=> handleFilterChange(checked, room, roomType)}/>
+                    <CheckBox key={index} label={room} selected={selectedFilters.roomType.includes(room)} onChange={(checked)=> handleFilterChange(checked, room, 'roomType')}/>
                 ))}
             </div>
             <div className='px-5 pt-5'>
                 <p className='font-medium text-gray-800 pb-2'>Price Range</p>
                 {priceRanges.map((range, index)=>(
-                    <CheckBox key={index} label={`${ currency} ${range}`} selected={selectedFilters.priceRange.includes(range)} onChange={(checked)=> handleFilterChange(checked, range, priceRange)}/>
+                    <CheckBox key={index} label={`${ currency} ${range}`} selected={selectedFilters.priceRange.includes(range)} onChange={(checked)=> handleFilterChange(checked, range, 'priceRange')}/>
                 ))}
             </div>
             <div className='px-5 pt-5 pb-7'>

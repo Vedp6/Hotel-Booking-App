@@ -39,7 +39,7 @@ export const AppProvider = ({children})=>{
           const token = await getToken();
           if(data.success){
             setIsOwner(data.role === "hotelOwner")
-            setSearchedCities(data.recentSearchCities || [])
+            setSearchedCities(data.recentSearchedCities || [])
           }else{
             // Retry Fetching User Details after 5 second
             setTimeout(() => {

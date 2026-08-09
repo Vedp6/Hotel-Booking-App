@@ -9,7 +9,7 @@ const Layout = () => {
 
   useEffect(() => {
   if(!isOwner){
-    Navigate('/')
+    navigate('/')
   }
   }, [isOwner])
   
