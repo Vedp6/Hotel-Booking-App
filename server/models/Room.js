@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const roomSchema = new mongoose.Schema({
     hotel: {type: String, ref: "Hotel", required: true},
@@ -6,9 +6,9 @@ const roomSchema = new mongoose.Schema({
     pricePerNight: {type: Number, required: true},
     amenities: {type: Array, required: true},
     images: [{type: String}],
-    isAvailable: {type:  Boolean, default: true},
-},{timestamps: true})
+    isAvailable: {type: Boolean, default: true},
+}, {timestamps: true});
 
-const Room = mongoose.model("Room", roomSchema)
+const Room = mongoose.model("Room", roomSchema);
 
 export default Room;
